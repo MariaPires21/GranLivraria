@@ -6,12 +6,13 @@ namespace GranLivraria.Models
     public class Livro
     {
         [Key]
-        public uint Id { get; set; }  
+        public uint Id { get; set; }
 
         [Required]
-        [StringLength(60)]
-        public string Titulo { get; set; } = string.Empty;  
+        [StringLength(100)]
+        public string Titulo { get; set; } = string.Empty;
 
+        // RELAÇÃO: Um livro pertence a um gênero
         public uint GeneroId { get; set; }
         public virtual Genero? Genero { get; set; }
 
@@ -20,6 +21,10 @@ namespace GranLivraria.Models
         public decimal Preco { get; set; }
 
         [Required]
-        public int Estoque { get; set; }
+        public uint Estoque { get; set; }
+
+        // NOVA PROPRIEDADE PARA A IMAGEM
+        [StringLength(500)]
+        public string? ImagemUrl { get; set; } = "/images/livros/capa-padrao.jpg";
     }
 }

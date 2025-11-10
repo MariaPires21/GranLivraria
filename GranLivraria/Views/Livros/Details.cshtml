@@ -1,42 +1,65 @@
 @model GranLivraria.Models.Livro
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Tomo";
 }
 
-<h1>Details</h1>
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="book-card">
+            <h1 class="page-title text-center">
+                <i class="fas fa-scroll me-2"></i>Detalhes do Tomo
+            </h1>
 
-<div>
-    <h4>Livro</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genero)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genero.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Preco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Preco)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estoque)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estoque)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-book-open fa-5x" style="color: #8B4513;"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4" style="color: #8B0000; font-weight: bold;">
+                            Título:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <strong>@Html.DisplayFor(model => model.Titulo)</strong>
+                        </dd>
+
+                        <dt class="col-sm-4" style="color: #8B0000; font-weight: bold;">
+                            Gênero:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <span class="book-stock">@Html.DisplayFor(model => model.Genero.Nome)</span>
+                        </dd>
+
+                        <dt class="col-sm-4" style="color: #8B0000; font-weight: bold;">
+                            Valor:
+                        </dt>
+                        <dd class="col-sm-8 book-price">
+                            @Html.DisplayFor(model => model.Preco)
+                        </dd>
+
+                        <dt class="col-sm-4" style="color: #8B0000; font-weight: bold;">
+                            Estoque:
+                        </dt>
+                        <dd class="col-sm-8">
+                            <span class="badge" style="background: #8B0000; color: #F5E6CA; padding: 8px 12px;">
+                                @Html.DisplayFor(model => model.Estoque) unidades
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-3">
+                    <i class="fas fa-edit me-2"></i>Reescrever
+                </a>
+                <a asp-action="Index" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Voltar ao Catálogo
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

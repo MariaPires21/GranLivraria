@@ -1,47 +1,78 @@
 @model GranLivraria.Models.Livro
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Escrever Novo Tomo";
 }
 
-<h1>Create</h1>
-
-<h4>Livro</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GeneroId" class="control-label"></label>
-                <select asp-for="GeneroId" class ="form-control" asp-items="ViewBag.GeneroId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Preco" class="control-label"></label>
-                <input asp-for="Preco" class="form-control" />
-                <span asp-validation-for="Preco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estoque" class="control-label"></label>
-                <input asp-for="Estoque" class="form-control" />
-                <span asp-validation-for="Estoque" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="col-md-8 mx-auto">
+        <div class="book-card">
+            <h1 class="page-title text-center">
+                <i class="fas fa-feather-alt me-2"></i>Escrever Novo Tomo
+            </h1>
+
+            <form asp-action="Create" class="mt-4">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Titulo" class="form-label" style="font-weight: bold; color: #8B0000;">
+                        <i class="fas fa-heading me-2"></i>Título do Tomo
+                    </label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Insira o título da obra..." />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="GeneroId" class="form-label" style="font-weight: bold; color: #8B0000;">
+                        <i class="fas fa-tags me-2"></i>Gênero do Conhecimento
+                    </label>
+                    <select asp-for="GeneroId" class="form-control" asp-items="ViewBag.GeneroId">
+                        <option value="">-- Selecione o Gênero --</option>
+                    </select>
+                    <span asp-validation-for="GeneroId" class="text-danger"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label asp-for="Preco" class="form-label" style="font-weight: bold; color: #8B0000;">
+                                <i class="fas fa-coins me-2"></i>Valor em Ouro
+                            </label>
+                            <input asp-for="Preco" class="form-control" type="number" step="0.01" placeholder="0.00" />
+                            <span asp-validation-for="Preco" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label asp-for="Estoque" class="form-label" style="font-weight: bold; color: #8B0000;">
+                                <i class="fas fa-cubes me-2"></i>Unidades no Arquivo
+                            </label>
+                            <input asp-for="Estoque" class="form-control" type="number" placeholder="0" />
+                            <span asp-validation-for="Estoque" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label asp-for="ImagemUrl" class="form-label" style="font-weight: bold; color: #2C3E50;">
+                        <i class="fas fa-image me-2"></i>URL da Capa
+                    </label>
+                    <input asp-for="ImagemUrl" class="form-control"
+                        placeholder="https://exemplo.com/capa.jpg ou /images/livros/nome-da-imagem.jpg" />
+                    <small class="form-text text-muted">
+                        Cole a URL da imagem da capa ou use o caminho local (/images/livros/)
+                    </small>
+                    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-save me-2"></i>Guardar no Arquivo
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-arrow-left me-2"></i>Voltar ao Catálogo
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

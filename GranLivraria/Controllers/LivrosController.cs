@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +18,8 @@ namespace GranLivraria.Controllers
         // GET: Livros
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Livros.Include(l => l.Genero);
-            return View(await applicationDbContext.ToListAsync());
+            var livros = await _context.Livros.Include(l => l.Genero).ToListAsync();
+            return View(livros);
         }
 
         // GET: Livros/Details/5
@@ -37,6 +33,7 @@ namespace GranLivraria.Controllers
             var livro = await _context.Livros
                 .Include(l => l.Genero)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (livro == null)
             {
                 return NotFound();
@@ -53,14 +50,18 @@ namespace GranLivraria.Controllers
         }
 
         // POST: Livros/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,GeneroId,Preco,Estoque")] Livro livro)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,GeneroId,Preco,Estoque,ImagemUrl")] Livro livro)
         {
             if (ModelState.IsValid)
             {
+                // Se não foi informada uma imagem, usa a padrão
+                if (string.IsNullOrEmpty(livro.ImagemUrl))
+                {
+                    livro.ImagemUrl = "/images/livros/capa-padrao.jpg";
+                }
+
                 _context.Add(livro);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,11 +88,9 @@ namespace GranLivraria.Controllers
         }
 
         // POST: Livros/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(uint id, [Bind("Id,Titulo,GeneroId,Preco,Estoque")] Livro livro)
+        public async Task<IActionResult> Edit(uint id, [Bind("Id,Titulo,GeneroId,Preco,Estoque,ImagemUrl")] Livro livro)
         {
             if (id != livro.Id)
             {
@@ -102,6 +101,22 @@ namespace GranLivraria.Controllers
             {
                 try
                 {
+                    // Se não foi informada uma imagem, mantém a atual ou usa a padrão
+                    if (string.IsNullOrEmpty(livro.ImagemUrl))
+                    {
+                        var livroExistente = await _context.Livros.AsNoTracking()
+                            .FirstOrDefaultAsync(l => l.Id == id);
+
+                        if (livroExistente != null && !string.IsNullOrEmpty(livroExistente.ImagemUrl))
+                        {
+                            livro.ImagemUrl = livroExistente.ImagemUrl;
+                        }
+                        else
+                        {
+                            livro.ImagemUrl = "/images/livros/capa-padrao.jpg";
+                        }
+                    }
+
                     _context.Update(livro);
                     await _context.SaveChangesAsync();
                 }

@@ -1,65 +1,597 @@
 :root {
-  --primary-color: #2c5530;
-  --secondary-color: #6b8e23;
-  --accent-color: #d4af37;
-  --light-color: #f8f9fa;
-  --dark-color: #343a40;
+  --primary-color: #2C5530;
+  --secondary-color: #4A7C59;
+  --accent-color: #8B4513;
+  --light-color: #F8F9FA;
+  --text-dark: #2C3E50;
+  --text-light: #6C757D;
+  --white: #FFFFFF;
+  --border-color: #E9ECEF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: #F5F7FA;
 }
 
+/* Header Moderno */
 .navbar {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--white) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  border-bottom: 3px solid var(--primary-color);
 }
 
 .navbar-brand {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.8rem;
-  color: white !important;
+  color: var(--primary-color) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-brand i {
+  color: var(--accent-color);
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-dark) !important;
   font-weight: 500;
-  transition: color 0.3s ease;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  margin: 0 0.25rem;
 }
 
 .nav-link:hover {
-  color: var(--accent-color) !important;
+  color: var(--primary-color) !important;
+  background-color: rgba(44, 85, 48, 0.1);
 }
 
+.nav-link.active {
+  color: var(--primary-color) !important;
+  background-color: rgba(44, 85, 48, 0.1);
+}
+
+/* Container Principal */
 .main-container {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  padding: 30px;
-  min-height: 70vh;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+  margin: 2rem auto;
+  padding: 2.5rem;
+  min-height: 60vh;
 }
 
+/* Títulos */
 .page-title {
   color: var(--primary-color);
-  border-bottom: 3px solid var(--accent-color);
-  padding-bottom: 10px;
-  margin-bottom: 30px;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  position: relative;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--accent-color);
+}
+
+/* Botões */
+.btn {
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  border: none;
-  border-radius: 25px;
-  padding: 10px 25px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(44, 85, 48, 0.4);
+  box-shadow: 0 6px 20px rgba(44, 85, 48, 0.3);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28A745, #20C997);
+  color: var(--white);
+}
+
+.btn-outline-primary {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-outline-danger {
+  border: 2px solid #DC3545;
+  color: #DC3545;
+  background: transparent;
+}
+
+.btn-outline-danger:hover {
+  background: #DC3545;
+  color: var(--white);
+}
+
+/* Tabelas */
+.table-container {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  margin: 0;
+  border-radius: 12px;
+}
+
+.table thead {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+}
+
+.table thead th {
+  border: none;
+  padding: 1.2rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.table tbody td {
+  padding: 1.2rem 1rem;
+  border-color: var(--border-color);
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(44, 85, 48, 0.04);
+  transform: scale(1);
+}
+
+/* Cards Modernos */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  border: none;
+  padding: 1.5rem;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* Formulários */
+.form-control {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--white);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(44, 85, 48, 0.1);
+  background: var(--white);
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* Badges e Status */
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.badge-genre {
+  background: rgba(74, 124, 89, 0.1);
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.badge-stock {
+  background: rgba(44, 85, 48, 0.1);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.price-tag {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ESTILOS ESPECÍFICOS PARA O CATÁLOGO */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.book-card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  padding: 30px;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Container da Imagem */
+.card-img-container {
+  height: 280px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.book-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Corpo do Card */
+.book-card .card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Título do Livro */
+.book-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3rem;
+}
+
+/* Gênero */
+.book-genre {
+  background: rgba(74, 124, 89, 0.1);
+  color: var(--secondary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--secondary-color);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+/* Preço */
+.book-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Estoque */
+.book-stock {
+  background: rgba(44, 85, 48, 0.1);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--primary-color);
+}
+
+/* Informações do Livro */
+.book-info {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Botões */
+.book-card .btn-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.book-card .btn-group .btn {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.book-card .btn-group .btn:hover {
+  transform: translateY(-2px);
+}
+
+.book-card .btn-group .btn i {
+  font-size: 0.9rem;
+}
+
+/* Estados vazios */
+.card:has(.card-img-top[src*="capa-padrao"]) .card-img-container {
+  background: linear-gradient(135deg, #e9ecef, #dee2e6);
+}
+
+.card:has(.card-img-top[src*="capa-padrao"]) .card-img-top {
+  object-fit: contain;
+  padding: 2rem;
+  opacity: 0.7;
+}
+
+/* Footer */
+.footer {
+  background: var(--text-dark);
+  color: var(--white);
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+}
+
+.footer h5 {
+  color: var(--white);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.footer a {
+  color: #BDC3C7;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--white);
+}
+
+/* Alertas */
+.alert {
+  border-radius: 10px;
+  border: none;
+  padding: 1.25rem 1.5rem;
+  font-weight: 500;
+}
+
+.alert-danger {
+  background: rgba(220, 53, 69, 0.1);
+  color: #DC3545;
+  border-left: 4px solid #DC3545;
+}
+
+.alert-success {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28A745;
+  border-left: 4px solid #28A745;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .main-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card-img-container {
+    height: 240px;
+  }
+
+  .book-card .card-body {
+    padding: 1.25rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .book-card .btn-group .btn {
+    padding: 0.7rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+}
+
+/* Utilitários */
+.text-accent {
+  color: var(--accent-color);
+}
+
+.bg-light-custom {
+  background: rgba(248, 249, 250, 0.8);
+}
+
+.shadow-custom {
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+}
+
+.text-muted {
+  color: var(--text-light) !important;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Focus states para acessibilidade */
+.btn:focus,
+.form-control:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Menu Hamburguer Responsivo */
+.navbar-toggler {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-collapse {
+  text-align: center;
+}
+
+/* Botões responsivos no catálogo */
+@media (max-width: 767.98px) {
+
+  /* Esconde o texto do botão "Adicionar Livro" no mobile */
+  .btn-responsive .btn-text {
+    display: none;
+  }
+
+  /* Ajusta o título do catálogo no mobile */
+  .page-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Botões de ação nos cards ficam menores */
+  .book-card .btn-group .btn {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Ajusta o grid para mobile */
+  .books-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Header mais compacto no mobile */
+  .navbar-brand {
+    font-size: 1.4rem;
+  }
+}
+
+/* Ajustes específicos para telas muito pequenas */
+@media (max-width: 375px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
+  }
+
+  .book-card .card-body {
+    padding: 1rem;
+  }
+}
+
+/* Melhorias no menu hamburguer */
+.navbar-nav .nav-link {
+  padding: 0.75rem 1rem !important;
+  margin: 0.25rem 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Para garantir que o menu funcione bem */
+.navbar-collapse.show {
+  padding: 1rem 0;
 }
